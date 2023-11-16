@@ -111,4 +111,124 @@ drop table employees
 
 -- COMMAND ----------
 
+create table managed_default
+
+-- COMMAND ----------
+
+drop table managed_default
+
+-- COMMAND ----------
+
+create table managed_default
+ (width INT, length INT, height INT);
+
+insert into managed_default
+values (3 INT, 2 INT, 1 INT)
+
+-- COMMAND ----------
+
+describe extended managed_default
+
+-- COMMAND ----------
+
+create table Ext_default
+(width INT, length INT, height INT)
+LOCATION 'dbfs:/mnt/demo/external_default';
+
+insert into Ext_default
+values (3 INT, 2 INT, 1 INT)
+
+-- COMMAND ----------
+
+create schema new_default
+
+-- COMMAND ----------
+
+describe database extended new_default
+
+-- COMMAND ----------
+
+USE new_default;
+
+CREATE TABLE managed_new_default
+  (width INT, length INT, height INT);
+  
+INSERT INTO managed_new_default
+VALUES (3 INT, 2 INT, 1 INT);
+
+-----------------------------------
+
+CREATE TABLE external_new_default
+  (width INT, length INT, height INT)
+LOCATION 'dbfs:/mnt/demo/external_new_default';
+  
+INSERT INTO external_new_default
+VALUES (3 INT, 2 INT, 1 INT);
+
+-- COMMAND ----------
+
+DESCRIBE EXTENDED managed_new_default
+
+-- COMMAND ----------
+
+use default;
+drop table managed_default
+
+-- COMMAND ----------
+
+drop table Ext_default
+
+-- COMMAND ----------
+
+USE new_default;
+DROP TABLE managed_new_default;
+DROP TABLE external_new_default;
+
+-- COMMAND ----------
+
+CREATE SCHEMA custom
+LOCATION 'dbfs:/Shared/schemas/custom.db'
+
+-- COMMAND ----------
+
+USE custom;
+
+CREATE TABLE managed_custom
+  (width INT, length INT, height INT);
+  
+INSERT INTO managed_custom
+VALUES (3 INT, 2 INT, 1 INT);
+
+-----------------------------------
+
+CREATE TABLE external_custom
+  (width INT, length INT, height INT)
+LOCATION 'dbfs:/mnt/demo/external_custom';
+  
+INSERT INTO external_custom
+VALUES (3 INT, 2 INT, 1 INT);
+
+-- COMMAND ----------
+
+DESCRIBE EXTENDED managed_custom
+
+-- COMMAND ----------
+
+DESCRIBE EXTENDED external_custom
+
+-- COMMAND ----------
+
+DROP TABLE managed_custom;
+DROP TABLE external_custom;
+
+-- COMMAND ----------
+
+-- MAGIC %fs ls 'dbfs:/Shared/schemas/custom.db/managed_custom'
+
+-- COMMAND ----------
+
+-- MAGIC %fs ls 'dbfs:/mnt/demo/external_custom'
+
+-- COMMAND ----------
+
 
